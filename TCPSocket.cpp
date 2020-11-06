@@ -38,6 +38,7 @@ int32_t TCPSocket::as_server(int32_t port){
         tsocket();
         tbind("ANY",port);
         tlisten();
+        std::cout << "listening!\n";
     
     return m_socket_fd;
 }
