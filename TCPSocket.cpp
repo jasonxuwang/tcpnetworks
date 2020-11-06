@@ -1,16 +1,16 @@
 #include "TCPSocket.h"
 
-TCPSocket::TCPSocket(){
+TCPSocket(){
     
 }
 
 
-TCPSocket::~TCPSocket(){
+~TCPSocket(){
     
 }
 
 
-int32_t TCPSocket::write(char* start, int23_t iLength){
+int32_t TCPSocket::write(char* start, int32_t iLength){
     // 发送start中的数据， iLength这么长
     return send(m_socket_fd, start, iLength,0 );
 }
