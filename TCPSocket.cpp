@@ -1,13 +1,13 @@
 #include "TCPSocket.h"
 
-// TCPSocket(){
+TCPSocket(){
     
-// }
+}
 
 
-// ~TCPSocket(){
+~TCPSocket(){
     
-// }
+}
 
 
 // int32_t TCPSocket::write(char* start, int32_t iLength){
