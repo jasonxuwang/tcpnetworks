@@ -13,14 +13,14 @@ class TCPSocket{
         void set_socket_fd(int32_t i_socket_fd);
         // wrapper for socket functions
 
-        int32_t read(char* start);
-        int32_t write(char* start, int32_t iLength);
+        int32_t tread(char* start);
+        int32_t twrite(char* start, int32_t iLength);
 
-        int32_t  socket();
-        int32_t  bind( char* ipstr,int port );
-        int32_t  listen();
-        int32_t  connect( char* ipstr,int port );
-        int32_t accept_conn();
+        int32_t  tsocket();
+        int32_t  tbind( char* ipstr,int port );
+        int32_t  tlisten();
+        int32_t  tconnect( char* ipstr,int port );
+        int32_t  taccept();
 
 
     private:

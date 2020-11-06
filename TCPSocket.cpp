@@ -10,12 +10,12 @@ TCPSocket::~TCPSocket(){
 }
 
 
-int32_t TCPSocket::write(char* start, int32_t iLength){
+int32_t TCPSocket::twrite(char* start, int32_t iLength){
     // 发送start中的数据， iLength这么长
     return send(m_socket_fd, start, iLength,0 );
 }
 
-int32_t TCPSocket::read(char* start){
+int32_t TCPSocket::tread(char* start){
     // 从自身内核的数据中读取字节流，读完为止.
     int32_t tLength, totLength = 0;
     while (1){
@@ -29,22 +29,22 @@ int32_t TCPSocket::read(char* start){
 }
 
 int32_t TCPSocket::as_client(char* ipstr,int32_t port){
-    socket();
-    connect(ipstr, port);
+    tsocket();
+    tconnect(ipstr, port);
 }
 
 
 int32_t TCPSocket::as_server(int32_t port){
-    socket();
-        bind(INADDR_ANY,port);
-        listen();
+        tsocket();
+        tbind(INADDR_ANY,port);
+        tlisten();
     
     return m_socket_fd;
 }
 
 
 
-int32_t TCPSocket::accept_conn(){
+int32_t TCPSocket::taccept(){
     return  accept(m_socket_fd, (struct sockaddr *) &m_client_addr, (socklen_t*) &addrlen);
 
 }
@@ -57,7 +57,7 @@ void TCPSocket::set_socket_fd(int32_t i_socket_fd){
 }
 
 
-int32_t TCPSocket::socket(){
+int32_t TCPSocket::tsocket(){
     m_socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (m_socket_fd < 0){
         perror("tcp socket: socket creation failed");
@@ -66,7 +66,7 @@ int32_t TCPSocket::socket(){
     return 0;
 }
 
-int32_t TCPSocket::bind( char* ipstr,int port ){
+int32_t TCPSocket::tbind( char* ipstr,int port ){
     addrlen = 0;
     memset(&m_socket_addr, 0, sizeof(m_socket_addr)); // empty memory
     // set ip, port and size
@@ -81,14 +81,14 @@ int32_t TCPSocket::bind( char* ipstr,int port ){
     return 0;
 }
 
-int32_t TCPSocket::listen(){
+int32_t TCPSocket::tlisten(){
     if (listen(m_socket_fd, SOCK_LISTEN_MAX)!= 0){
         perror("tcp socket: listen failed");
         exit(EXIT_FAILURE);
     }
     return 0;
 }
-int32_t TCPSocket::connect( char* ipstr,int port){
+int32_t TCPSocket::tconnect( char* ipstr,int port){
     bzero(&m_client_addr,sizeof(m_client_addr));
 	m_client_addr.sin_family = AF_INET;
 	m_client_addr.sin_port = htons(port);
