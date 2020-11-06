@@ -36,7 +36,7 @@ int32_t TCPSocket::as_client(char* ipstr,int32_t port){
 
 int32_t TCPSocket::as_server(int32_t port){
         tsocket();
-        tbind(INADDR_ANY,port);
+        tbind("ANY",port);
         tlisten();
     
     return m_socket_fd;
