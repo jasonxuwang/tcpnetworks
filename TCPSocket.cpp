@@ -77,7 +77,6 @@ int32_t TCPSocket::tbind( char* ipstr,int port ){
     memset(&m_socket_addr, 0, sizeof(m_socket_addr)); // empty memory
     // set ip, port and size
     m_socket_addr.sin_family = AF_INET;
-    m_socket_addr.sin_addr.s_addr = htonl(ipstr);
     if (strcmp(ipstr, "ANY")){
         m_socket_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     }
