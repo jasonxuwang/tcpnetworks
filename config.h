@@ -28,7 +28,7 @@
 
 
 
-
+#define SOCK_LISTEN_MAX 20
 #define PORT 10009
 #define TIMEOUT 1000
 #define MAXEVENT 100

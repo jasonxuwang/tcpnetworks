@@ -67,12 +67,21 @@ int32_t TCPSocket::tsocket(){
 }
 
 int32_t TCPSocket::tbind( char* ipstr,int port ){
+
+    if (strcmp(ipstr, "ANY")){
+
+    }
+
+
     addrlen = 0;
     memset(&m_socket_addr, 0, sizeof(m_socket_addr)); // empty memory
     // set ip, port and size
     m_socket_addr.sin_family = AF_INET;
     m_socket_addr.sin_addr.s_addr = htonl(ipstr);
-    m_socket_addr.sin_port = (u_short)htons(port);
+    if (strcmp(ipstr, "ANY")){
+        m_socket_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    }
+    inet_pton(AF_INET,ipstr,&m_socket_addr.sin_addr.s_addr); 
     socklen_t addr_size = socklen_t(sizeof(m_socket_addr));
     if (bind(m_socket_fd,  (const sockaddr*) &m_socket_addr ,addr_size) != 0) {
         perror("tcp socket: bind failed");
