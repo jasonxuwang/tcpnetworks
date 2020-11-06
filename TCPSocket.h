@@ -25,7 +25,7 @@ class TCPSocket{
         // wrapper for socket functions
 
         int32_t read(char* start);
-        int32_t write(char* start, int23_t iLength);
+        int32_t write(char* start, int32_t iLength);
 
         int32_t  socket();
         int32_t  bind( char* ipstr,int port );
