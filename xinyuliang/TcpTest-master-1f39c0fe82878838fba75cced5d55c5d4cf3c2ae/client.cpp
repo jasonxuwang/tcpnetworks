@@ -87,20 +87,22 @@ void recv_messgaes_client() {
 		}
 		else if (socketfd == 0) {
 			char buffer[max_ss_package_size];
-			memset(buffer,0, max_ss_package_size);
+			memset(buffer,'\0', max_ss_package_size);
 			ClientMsg c_msg;
 			gets(buffer);
-
+			if (send(sock, buffer, strlen(buffer),0)){
+				return;
+			}
 			
-			// printf("Please type in your Action : 1.Attack 2.Defend \n");
-			// int act = 0;
-			// std::cin >> act;
-			if (strlen(buffer) >0 )
-			{
-				srand(time(NULL));
-			c_msg.set_id(rand());
-			c_msg.set_uid(sock);
-			c_msg.set_act(std::string(buffer));
+			// // printf("Please type in your Action : 1.Attack 2.Defend \n");
+			// // int act = 0;
+			// // std::cin >> act;
+			// if (strlen(buffer) >0 )
+			// {
+			// 	srand(time(NULL));
+			// c_msg.set_id(rand());
+			// c_msg.set_uid(sock);
+			// c_msg.set_act(std::string(buffer));
 			// switch (act) {
 			// case 1:
 	
@@ -112,30 +114,30 @@ void recv_messgaes_client() {
 			// 	return;
 			// }
 
-			int32_t p_len = c_msg.ByteSize();
-			char* lenptr = new char[4];//!!
+			// int32_t p_len = c_msg.ByteSize();
+			// char* lenptr = new char[4];//!!
 			
-			memcpy(lenptr, &p_len, sizeof(int32_t));
-			uint8_t str[2 * p_len];
+			// memcpy(lenptr, &p_len, sizeof(int32_t));
+			// uint8_t str[2 * p_len];
 
-			memset(str, 0, 2 * p_len);
-			c_msg.SerializeToArray(str, p_len);
-			for (int i = 0; i < 4; i++) {
-				buffer[i] = lenptr[i];
-			}
-			for (int i = 4; i < 4 + p_len; i++) {
-				buffer[i] = str[i - 4];
-			}
-			for(int i = 0 ; i < 40 ; i++){
-				std::cout<<buffer[i];
-			}
-			printf("send to server %d \n", sock);
-			int send_return = send(sock, buffer, p_len+5,0);
-			if(send_return < 0)
-				printf("fail");
-				return;
+			// memset(str, 0, 2 * p_len);
+			// c_msg.SerializeToArray(str, p_len);
+			// for (int i = 0; i < 4; i++) {
+			// 	buffer[i] = lenptr[i];
+			// }
+			// for (int i = 4; i < 4 + p_len; i++) {
+			// 	buffer[i] = str[i - 4];
+			// }
+			// for(int i = 0 ; i < 40 ; i++){
+			// 	std::cout<<buffer[i];
+			// }
+			// printf("send to server %d \n", sock);
+			// int send_return = send(sock, buffer, p_len+5,0);
+			// if(send_return < 0)
+			// 	printf("fail");
+			// 	return;
 
-			}
+			// }
 			
 		}
 		else {
