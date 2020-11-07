@@ -46,6 +46,11 @@ void initialized() {
 void recv_messgaes_client() {
 
 	int count_fd = epoll.epoll_wait(1);
+	std::cout << "num of count_fd: " << count_fd << std::endl;
+	for (int i = 0; i < count_fd; i++) {
+		std::cout << epoll.get_event(i)->data.fd << " ";
+	}
+	std::cout << "end round\n";
 
 	for (int i = 0; i < count_fd; i++) {
 		//读取服务器传回的数据
@@ -66,7 +71,7 @@ void recv_messgaes_client() {
 					return;
 				memcpy(&length, buffer, sizeof(int32_t));
 
-				printf("%d \n",length);
+				printf("length is : %d \n",length);
 				if(length<=0)
 					return;
 				pst_read += 4;
