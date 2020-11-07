@@ -78,12 +78,6 @@ int32_t TCPSocket::tsocket(){
 }
 
 int32_t TCPSocket::tbind( char* ipstr,int port ){
-
-    if (strcmp(ipstr, "ANY")){
-
-    }
-
-
     addrlen = 0;
     memset(&m_socket_addr, 0, sizeof(m_socket_addr)); // empty memory
     // set ip, port and size
@@ -114,6 +108,7 @@ int32_t TCPSocket::tconnect( char* ipstr,int port){
 	inet_pton(AF_INET,ipstr,&m_client_addr.sin_addr.s_addr); 
     int res = connect(m_socket_fd,(struct sockaddr *)&m_client_addr,sizeof(m_client_addr));	
     if (res < 0){
+        std::cout << "res is: " <<res << std::endl;
         perror("tcp socket: connection failed");
         exit(EXIT_FAILURE);    
     }
