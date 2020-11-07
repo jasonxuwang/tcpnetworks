@@ -105,7 +105,7 @@ int32_t TCPSocket::tconnect( char* ipstr,int port){
     bzero(&m_client_addr,sizeof(m_client_addr));
 	m_client_addr.sin_family = AF_INET;
 	m_client_addr.sin_port = htons(port);
-	inet_pton(AF_INET,ipstr,&m_client_addr.sin_addr.s_addr); 
+	inet_pton(AF_INET,ipstr,&m_client_addr.sin_addr); 
     int res = connect(m_socket_fd,(struct sockaddr *)&m_client_addr,sizeof(m_client_addr));	
     if (res < 0){
         std::cout << "res is: " <<res << std::endl;
