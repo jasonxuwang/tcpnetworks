@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+
+message ServerMsg{
+	required int32 id = 1;
+	required int32 uid = 2;
+	required string msg = 3;
+}
+
+message ClientMsg{
+	required int32 id = 1;
+	required int32 uid = 2;
+	required string act = 3;
+}
