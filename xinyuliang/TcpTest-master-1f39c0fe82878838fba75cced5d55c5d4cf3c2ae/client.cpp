@@ -84,24 +84,28 @@ void recv_messgaes_client() {
 			char buffer[max_ss_package_size];
 			memset(buffer,0, max_ss_package_size);
 			ClientMsg c_msg;
-			printf("Please type in your Action : 1.Attack 2.Defend \n");
-			int act = 0;
-			std::cin >> act;
-			srand(time(NULL));
+			gets(buffer);
 
+			
+			// printf("Please type in your Action : 1.Attack 2.Defend \n");
+			// int act = 0;
+			// std::cin >> act;
+			if (strlen(buffer) >0 )
+			{
+				srand(time(NULL));
 			c_msg.set_id(rand());
 			c_msg.set_uid(sock);
-
-			switch (act) {
-			case 1:
-				c_msg.set_act("Attack");
-				break;
-			case 2:
-				c_msg.set_act("Defend");
-				break;
-			default:
-				return;
-			}
+			c_msg.set_act(std::string(buffer));
+			// switch (act) {
+			// case 1:
+	
+			// 	break;
+			// case 2:
+			// 	c_msg.set_act("Defend");
+			// 	break;
+			// default:
+			// 	return;
+			// }
 
 			int32_t p_len = c_msg.ByteSize();
 			char* lenptr = new char[4];//!!
@@ -126,6 +130,8 @@ void recv_messgaes_client() {
 				printf("fail");
 				return;
 
+			}
+			
 		}
 		else {
 			return;
