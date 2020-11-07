@@ -2,9 +2,18 @@
 #include "Epoll.h"
 
 int main(){
-
         TCPSocket tsock;
-        tsock.as_server(PORT);
+        tsock.as_client(IPSTR,PORT);
 
-    return 0;
+        while (1){
+
+            std::cout << "Input: ";
+            char* buff;
+            memset(buff, '\0', sizeof(buff));
+            gets(buff);
+            tsock.twrite(buff,strlen(buff));
+
+        }
+
+        return 0;
 }
