@@ -5,6 +5,7 @@ int main(){
 
         TCPSocket m_Sock;
         Epoll m_Epoll;
+        m_epoll_fd  = m_epoll.epoll_init(TIMEOUT,MAXEVENT);
         struct epoll_event * m_epoll_event;
         std::map<int32_t, TCPSocket> m_user_map;
 
