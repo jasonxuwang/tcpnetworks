@@ -28,12 +28,22 @@ int32_t TCPSocket::tread(char* start){
     return totLength;
 }
 
+
+/**
+ * cerate socket
+ * try to connect 
+ */
 int32_t TCPSocket::as_client(char* ipstr,int32_t port){
     tsocket();
     tconnect(ipstr, port);
+    return 0;
 }
 
-
+/**
+ * create socket
+ * bind
+ * listening
+ */
 int32_t TCPSocket::as_server(int32_t port){
         tsocket();
         tbind("ANY",port);
